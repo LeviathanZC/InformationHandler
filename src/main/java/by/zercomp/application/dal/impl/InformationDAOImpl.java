@@ -38,19 +38,19 @@ public class InformationDAOImpl implements InformationDAO {
     }
 
     @Override
-    public List<String> findAll() throws DaoException {
-        List<String> strings = new ArrayList<>();
+    public String findAll() throws DaoException {
+        StringBuilder builder = new StringBuilder();
         File file = new File(this.path);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = reader.readLine()) != null) {
-                strings.add(line);
+                builder.append(line);
             }
         } catch (FileNotFoundException e) {
             throw new DaoException("can't read file : " + e);
         } catch (IOException e) {
             throw new DaoException("error while reading file : " + e);
         }
-        return strings;
+        return builder.toString();
     }
 }

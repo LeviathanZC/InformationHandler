@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface InformationDAO {
 
-    List<String> findAll() throws DaoException;
+    String findAll() throws DaoException;
 
 }

@@ -1,7 +1,7 @@
 package by.zercomp.application.service;
 
-public interface Service<T> {
+public interface Service<T, V> {
 
-    T perform() throws ServiceException;
+    T perform(V request) throws ServiceException;
 
 }

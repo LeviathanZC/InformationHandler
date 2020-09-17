@@ -9,21 +9,19 @@ import by.zercomp.application.service.parser.LinkParser;
 import by.zercomp.application.service.RegexConst;
 import by.zercomp.application.service.Service;
 
-import java.util.List;
-
-public class FindService implements Service<Text> {
+public class FindService implements Service<Text, Boolean> {
 
 
     @Override
-    public Text perform() throws ServiceException {
+    public Text perform(Boolean stub) throws ServiceException {
         InformationDAO dao = InformationDAOImpl.getInstance();
-        List<String> allStrings;
+        String allText;
         try {
-            allStrings = dao.findAll();
+            allText = dao.findAll();
             LinkParser parser = new LinkParser(RegexConst.SENTENCE);
             parser.setNext(new LinkParser(RegexConst.WORD_OR_PUNCT));
             parser.setNext(new LinkParser(RegexConst.WORD));
-            return (Text) parser.parse(allStrings.toString());
+            return (Text) parser.parse(allText);
         } catch (DaoException e) {
             throw new ServiceException();
         }
